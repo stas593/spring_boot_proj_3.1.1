@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:form="http://www.w3.org/1999/xhtml">
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+    <body>
+        <h1>Введите новые данные пользователя</h1>
+        <form action="#" th:action="@{/saveUser}">
+            <table border="1">
+                <input type="hidden" th:field="${userUp.id}"/>
+                <tr>
+                    <th>Имя:</th>
+                    <th><input type="text" th:field="${userUp.name}"/></th>
+                </tr>
+                <tr>
+                    <th>Фамилия:</th>
+                    <th><input type="text" th:field="${userUp.surname}" /></th>
+                </tr>
+                <tr>
+                    <th>Емаил:</th>
+                    <th><input type="text" th:field="${userUp.mail}" required/></th>
+                </tr>
+                <tr>
+                    <th>Возраст:</th>
+                    <th><input type="text" th:field="${userUp.age}" /></th>
+                </tr>
+                <tr>
+                    <th>Пороль:</th>
+                    <th><input type="text" th:field="${userUp.password}" /></th>
+                </tr>
+                <tr>
+                    <th>Роль:</th>
+                    <th>
+                        <select th:name="roleName", size="2">
+                            <option th:each="role : ${roles}"
+                                    th:value="${role.nameRole}"
+                                    th:utext="${#strings.replace(role.nameRole, 'ROLE_', '')}"></option>
+                        </select></th>
+                </tr>
+            </table>
+            <p><input type="submit" value="ОК" /></p>
+        </form>
+
+    </body>
+</html>

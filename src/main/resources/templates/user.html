@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:form="http://www.w3.org/1999/xhtml">
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <h2>Ваши данные:</h2>
+    <table border="1">
+        <tr>
+            <th>Имя</th>
+            <th>Фамилия</th>
+            <th>Эл. почта</th>
+            <th>Возраст</th>
+            <th>Роль</th>
+        </tr>
+        <!--/*@thymesVar id="users" type=""*/-->
+        <tr>
+            <td><th:block th:text="${User.getName()}"></th:block></td>
+            <td><th:block th:text="${User.getSurname()}"></th:block></td>
+            <td><th:block th:text="${User.getMail()}"></th:block></td>
+            <td><th:block th:text="${User.getAge()}"></th:block></td>
+            <td th:each="us1 : ${User.roles}"><p th:text="${#strings.replace(us1.nameRole, 'ROLE_', '')}"></p></td>
+        </tr>
+    </table>
+    <th:block><a th:href="@{/}">Вернуться на главную страницу</a></th:block>
+    <br>
+    <th:block><a th:href="@{/logout}">Выйти</a></th:block>
+
+</body>
+</html>
