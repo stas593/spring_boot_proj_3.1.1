@@ -7,13 +7,18 @@
     <title></title>
     <style>
         .form-button {
-            margin-top: 5px;
+            margin-top: 7px;
             width: 100%;
+            font-size: 20px;
         }
         .form {
             align-items: center;
             max-width: 350px;
             margin-top: 60px;
+        }
+        h3 {
+            font-weight: 700;
+            margin-bottom: 15px!important;
         }
     </style>
 </head>
@@ -22,12 +27,12 @@
             <form method="post" action="/login">
                 <div class="mb">
                     <h3 for="exampleInputEmail1" class="form-label">Please sign in</h3>
-                    <input placeholder="Email adress" name="j_username" type="name" class="form-control" id="exampleInputEmail1">
+                    <input autocomplete="on" placeholder="Email adress" name="j_username" type="text" class="form-control" id="exampleInputEmail1">
                 </div>
                 <div>
-                    <input placeholder="Password" name="j_password" type="password" class="form-control" id="exampleInputPassword1">
+                    <input autocomplete="on" placeholder="Password" name="j_password" type="password" class="form-control" id="exampleInputPassword1">
                 </div>
-                    <button  type="submit" class="btn btn-primary form-button">Sign in</button>
+                    <button type="submit" class="btn btn-primary form-button">Sign in</button>
             </form>
 </div>
 
