@@ -12,7 +12,7 @@
     <div class="container-fluid g-0">
         <div class="row admin-header">
             <div class="col admin-header_info d-flex">
-                <p><span class="admin-header_info_mail">[[${autUser.getMail()}]]&#160</span>with roles: <span th:each="us1 : ${autUser.getRoles()}" th:text="${#strings.replace(us1.nameRole, 'ROLE_', '')}">&#160</span></p>
+                <p><span class="admin-header_info_mail">[[${autUser.getMail()}]]&#160</span>with roles: <span th:each="us1 : ${autUser.getRoles()}" th:text="${#strings.replace(us1.nameRole, 'ROLE_', ' ')}"></span></p>
             </div>
             <div class="col admin-header_logout d-flex">
                 <a th:href="@{/logout}">Logout</a>
@@ -66,7 +66,7 @@
                                                 <td><th:block th:text="${us.getSurname()}"></th:block></td>
                                                 <td><th:block th:text="${us.getMail()}"></th:block></td>
                                                 <td><th:block th:text="${us.getAge()}"></th:block></td>
-                                                <td ><p th:each="us1 : ${us.roles}" th:text="${#strings.replace(us1.nameRole, 'ROLE_', '')}"></p></td>
+                                                <td ><span th:each="us1 : ${us.roles}" th:text="${#strings.replace(us1.nameRole, 'ROLE_', ' ')}"></span></td>
                                                 <td><button type="button" class="btn btn-info"><a th:href="@{updateUser(id=${us.getId()})}">Edit</a></button></td>
                                                 <td><button type="button" class="btn btn-danger"><a th:href="@{deleteUser(id=${us.getId()})}">Delete</a></button></td>
                                             </tr>
@@ -125,6 +125,61 @@
             </div>
         </div>
     </div>
+
+<!--    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">-->
+<!--        Launch demo modal-->
+<!--    </button>-->
+
+<!--    &lt;!&ndash; Modal &ndash;&gt;-->
+<!--    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">-->
+<!--        <div class="modal-dialog">-->
+<!--            <div class="modal-content">-->
+<!--                <div class="modal-header">-->
+<!--                    <h5 class="modal-title" id="exampleModalLabel">Edit user</h5>-->
+<!--                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+<!--                </div>-->
+<!--                <div class="modal-body">-->
+<!--                    <div class="admin-body_info_tabs_tab_content_formAdd">-->
+<!--                        <form action="#" th:action="@{/saveUser}">-->
+<!--                            <div class="admin-body_info_tabs_tab_content_formAdd_element">-->
+<!--                                <h4>First name</h4>-->
+<!--                                <input class="form-control" type="text" th:field="${user.name}"/>-->
+<!--                            </div>-->
+<!--                            <div class="admin-body_info_tabs_tab_content_formAdd_element">-->
+<!--                                <h4>Last name</h4>-->
+<!--                                <input class="form-control" type="text" th:field="${user.surname}"/>-->
+<!--                            </div>-->
+<!--                            <div class="admin-body_info_tabs_tab_content_formAdd_element">-->
+<!--                                <h4>Age</h4>-->
+<!--                                <input class="form-control" type="text" th:field="${user.age}" />-->
+<!--                            </div>-->
+<!--                            <div class="admin-body_info_tabs_tab_content_formAdd_element">-->
+<!--                                <h4>Email</h4>-->
+<!--                                <input class="form-control" type="text" th:field="${user.mail}" required/>-->
+<!--                            </div>-->
+<!--                            <div class="admin-body_info_tabs_tab_content_formAdd_element">-->
+<!--                                <h4>Password</h4>-->
+<!--                                <input class="form-control" type="text" th:field="${user.password}" />-->
+<!--                            </div>-->
+<!--                            <div class="admin-body_info_tabs_tab_content_formAdd_element">-->
+<!--                                <h4>Role</h4>-->
+<!--                                <select class="form-control" th:name="roleName", size="2" required>-->
+<!--                                    <option th:each="role : ${roles}"-->
+<!--                                            th:value="${role.nameRole}"-->
+<!--                                            th:utext="${#strings.replace(role.nameRole, 'ROLE_', '')}"></option>-->
+<!--                                </select>-->
+<!--                            </div>-->
+<!--                        </form>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="modal-footer">-->
+<!--                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>-->
+<!--                    <button class="btn btn-success" type="submit">Add new user</button>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
     </body>
 </html>

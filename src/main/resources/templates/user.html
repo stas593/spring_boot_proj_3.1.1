@@ -12,7 +12,7 @@
 <div class="container-fluid g-0">
     <div class="row admin-header">
         <div class="col admin-header_info d-flex">
-            <p><span class="admin-header_info_mail">[[${user.getMail()}]]&#160</span>with roles: <span th:each="us1 : ${user.getRoles()}" th:text="${#strings.replace(us1.nameRole, 'ROLE_', '')}">&#160</span></p>
+            <p><span class="admin-header_info_mail">[[${user.getMail()}]]&#160</span>with roles: <span th:each="us1 : ${user.getRoles()}" th:text="${#strings.replace(us1.nameRole, 'ROLE_', ' ')}"></span></p>
         </div>
         <div class="col admin-header_logout d-flex">
             <a th:href="@{/logout}">Logout</a>
@@ -55,7 +55,7 @@
                                     <td><th:block th:text="${user.getSurname()}"></th:block></td>
                                     <td><th:block th:text="${user.getMail()}"></th:block></td>
                                     <td><th:block th:text="${user.getAge()}"></th:block></td>
-                                    <td ><p th:each="us1 : ${user.roles}" th:text="${#strings.replace(us1.nameRole, 'ROLE_', '')}"></p></td>
+                                    <td ><span th:each="us1 : ${user.roles}" th:text="${#strings.replace(us1.nameRole, 'ROLE_', ' ')}"></span></td>
                                 </tr>
                             </tbody>
                         </table>
