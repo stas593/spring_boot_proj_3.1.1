@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       xmlns:form="http://www.w3.org/1999/xhtml">
 <html lang="ru">
 <head>
@@ -25,8 +26,10 @@
             <td th:each="us1 : ${User.roles}"><p th:text="${#strings.replace(us1.nameRole, 'ROLE_', '')}"></p></td>
         </tr>
     </table>
-    <th:block><a th:href="@{/}">Вернуться на главную страницу</a></th:block>
-    <br>
+    <div sec:authorize="hasRole('ROLE_ADMIN')">
+        <th:block><a th:href="@{/admin}">Панель управления пользователями</a></th:block>
+        <br>
+    </div>
     <th:block><a th:href="@{/logout}">Выйти</a></th:block>
 
 </body>

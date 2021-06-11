@@ -26,15 +26,15 @@
                             <td><th:block th:text="${us.getAge()}"></th:block></td>
                             <td ><p th:each="us1 : ${us.roles}" th:text="${#strings.replace(us1.nameRole, 'ROLE_', '')}"></p></td>
                             <td><th:block th:text="${us.password}"></th:block></td>
-                            <td><th:block><a th:href="@{deleteUser(id=${us.getId()})}">Удалить</a></th:block></td>
-                            <td><th:block><a th:href="@{updateUser(id=${us.getId()})}">Изменить</a></th:block></td>
+                            <td><th:block><a th:href="@{/admin/deleteUser(id=${us.getId()})}">Удалить</a></th:block></td>
+                            <td><th:block><a th:href="@{/admin/updateUser(id=${us.getId()})}">Изменить</a></th:block></td>
                         </tr>
                     </th:block>
             </table>
             <br>
 
         <h2>Добавить пользователя</h2>
-        <form action="#" th:action="@{/addUser}">
+        <form action="#" th:action="@{/admin/addUser}">
         <table border="1">
             <tr>
                 <th>Имя:</th>
@@ -70,7 +70,7 @@
             <p><input type="submit" value="ОК" /></p>
         </form>
         <br>
-        <th:block><a th:href="@{/}">Вернуться на главную страницу</a></th:block>
+        <th:block><a th:href="@{/user}">Данные пользователя</a></th:block>
         <br>
         <th:block><a th:href="@{/logout}">Выйти</a></th:block>
     </body>
