@@ -67,8 +67,8 @@
                                                 <td><th:block th:text="${us.getMail()}"></th:block></td>
                                                 <td><th:block th:text="${us.getAge()}"></th:block></td>
                                                 <td ><span th:each="us1 : ${us.roles}" th:text="${#strings.replace(us1.nameRole, 'ROLE_', ' ')}"></span></td>
-                                                <td><button type="button" class="btn btn-info"><a th:href="@{updateUser(id=${us.getId()})}">Edit</a></button></td>
-                                                <td><button type="button" class="btn btn-danger"><a th:href="@{deleteUser(id=${us.getId()})}">Delete</a></button></td>
+                                                <td><button type="button" class="btn btn-info"><a th:href="@{/admin/updateUser(id=${us.getId()})}">Edit</a></button></td>
+                                                <td><button type="button" class="btn btn-danger"><a th:href="@{/admin/deleteUser(id=${us.getId()})}">Delete</a></button></td>
                                             </tr>
                                         </th:block>
                                     </tbody>
@@ -84,7 +84,7 @@
                             </div>
                             <div class="admin-body_info_tabs_tab_content">
                                 <div class="admin-body_info_tabs_tab_content_formAdd">
-                                    <form action="#" th:action="@{/addUser}">
+                                    <form action="#" th:action="@{/admin/addUser}">
                                         <div class="admin-body_info_tabs_tab_content_formAdd_element">
                                             <h4>First name</h4>
                                             <input class="form-control" type="text" th:field="${user.name}"/>
