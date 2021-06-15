@@ -35,6 +35,7 @@ tbody td{
     padding-bottom: 10px;
 }
 
+
 .bactive {
     color: white!important;
     background-color: #007cff;
@@ -83,7 +84,7 @@ tbody td{
 
 .admin-body_pages {
     margin-top: 15px;
-    height: 100vh;
+    height: 100vh!important;
 }
 .admin-body_pages_button {
     padding-left: 15px;
@@ -136,8 +137,11 @@ tbody td{
     flex-direction: column;
 }
 .admin-body_info_tabs_tab_content_formAdd input{
-    width: 350px;
     height: 35px;
+    width: 300px!important;
+}
+.admin-body_info_tabs_tab_content_formAdd select{
+    width: 300px!important;
 }
 .admin-body_info_tabs_tab_content_formAdd h4{
     margin-top: 15px;

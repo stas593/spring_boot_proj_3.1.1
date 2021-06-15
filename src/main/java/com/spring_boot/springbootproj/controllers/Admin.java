@@ -55,15 +55,15 @@ public class Admin {
     }
 
     @PostMapping(value = "/saveUser")
-    public String updateUser(@ModelAttribute(value = "userUp") User user, @RequestParam(name = "roleName", required = false) String roleName){
+    public String updateUser(@ModelAttribute(name = "userUp") User user, @RequestParam(name = "roleName", required = false) String roleName){
         System.out.println(user.toString());
-//        if(roleName == null){
-//            user.setRoles(us.getUser(user.getId()).getRoles());
-//            us.updateUser(user);
-//        } else {
-//            user.addRoleToUser(rs.getRoleByName(roleName));
-//            us.updateUser(user);
-//        }
+        if(roleName == null){
+            user.setRoles(us.getUser(user.getId()).getRoles());
+            us.updateUser(user);
+        } else {
+            user.addRoleToUser(rs.getRoleByName(roleName));
+            us.updateUser(user);
+        }
         return "redirect:/admin";
     }
 }
