@@ -15,5 +15,4 @@ public interface UserService {
     void updateUser(User user);
     List<User> getAllUsers();
     void addRoleToUser(long userId, String nameRole);
-    Set<Role> getAllRolesFromUser(long userId);
 }

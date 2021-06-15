@@ -6,10 +6,7 @@ import com.spring_boot.springbootproj.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import com.spring_boot.springbootproj.models.User;
 
 @Controller
@@ -38,7 +35,7 @@ public class Admin {
         return "redirect:/admin";
     }
 
-    @GetMapping(value = "/addUser")
+    @PostMapping(value = "/addUser")
     public String addUser(@ModelAttribute("user") User user, @RequestParam(name = "roleName") String roleName){
         user.addRoleToUser(rs.getRoleByName(roleName));
         us.addUser(user);
@@ -53,7 +50,7 @@ public class Admin {
         return "update-user";
     }
 
-    @GetMapping(value = "/saveUser")
+    @PostMapping(value = "/saveUser")
     public String updateUser(@ModelAttribute(name = "userUp") User user, @RequestParam(name = "roleName", required = false) String roleName){
         System.out.println(user.toString());
         if(roleName == null){
