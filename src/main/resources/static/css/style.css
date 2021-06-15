@@ -133,6 +133,7 @@ tbody td{
 .admin-body_info_tabs_tab_content_formAdd{
     display: flex;
     justify-content: center;
+    flex-direction: column;
 }
 .admin-body_info_tabs_tab_content_formAdd input{
     width: 350px;

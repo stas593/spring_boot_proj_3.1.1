@@ -6,10 +6,7 @@ import com.spring_boot.springbootproj.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import com.spring_boot.springbootproj.models.User;
 
 import java.security.Principal;
@@ -30,6 +27,7 @@ public class Admin {
         model.addAttribute("users", us.getAllUsers());
         model.addAttribute("autUser", us.findUserByLogin(principal.getName()));
         model.addAttribute("user", new User());
+        model.addAttribute("userUp", new User());
         model.addAttribute("role", new Role());
         return "admin";
     }
@@ -41,7 +39,7 @@ public class Admin {
         return "redirect:/admin";
     }
 
-    @GetMapping(value = "/addUser")
+    @PostMapping(value = "/addUser")
     public String addUser(@ModelAttribute("user") User user, @RequestParam(name = "roleName") String roleName){
         user.addRoleToUser(rs.getRoleByName(roleName));
         us.addUser(user);
@@ -56,16 +54,16 @@ public class Admin {
         return "update-user";
     }
 
-    @GetMapping(value = "/saveUser")
-    public String updateUser(@ModelAttribute(name = "userUp") User user, @RequestParam(name = "roleName", required = false) String roleName){
+    @PostMapping(value = "/saveUser")
+    public String updateUser(@ModelAttribute(value = "userUp") User user, @RequestParam(name = "roleName", required = false) String roleName){
         System.out.println(user.toString());
-        if(roleName == null){
-            user.setRoles(us.getUser(user.getId()).getRoles());
-            us.updateUser(user);
-        } else {
-            user.addRoleToUser(rs.getRoleByName(roleName));
-            us.updateUser(user);
-        }
+//        if(roleName == null){
+//            user.setRoles(us.getUser(user.getId()).getRoles());
+//            us.updateUser(user);
+//        } else {
+//            user.addRoleToUser(rs.getRoleByName(roleName));
+//            us.updateUser(user);
+//        }
         return "redirect:/admin";
     }
 }

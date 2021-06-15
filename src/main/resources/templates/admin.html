@@ -59,7 +59,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <th:block th:each="us : ${users}">
+                                        <th:block th:each="us, stat : ${users}">
                                             <tr>
                                                 <td><th:block th:text="${us.getId()}"></th:block></td>
                                                 <td><th:block th:text="${us.getName()}"></th:block></td>
@@ -67,7 +67,68 @@
                                                 <td><th:block th:text="${us.getMail()}"></th:block></td>
                                                 <td><th:block th:text="${us.getAge()}"></th:block></td>
                                                 <td ><span th:each="us1 : ${us.roles}" th:text="${#strings.replace(us1.nameRole, 'ROLE_', ' ')}"></span></td>
-                                                <td><button type="button" class="btn btn-info"><a th:href="@{/admin/updateUser(id=${us.getId()})}">Edit</a></button></td>
+<!--                                                <td><button type="button" class="btn btn-info"><a th:href="@{/admin/updateUser(id=${us.getId()})}">Edit</a></button></td>-->
+                                                <td><button type="button" class="btn btn-info" data-bs-toggle="modal" th:data-bs-target="'#exampleModal' + ${stat.count}">Edit</button></td>
+
+                                                <!-- Button trigger modal -->
+
+
+                                                <!-- Modal -->
+                                                <div class="modal fade" th:id="exampleModal + ${stat.count}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <div class="admin-body_info_tabs_tab_content_formAdd">
+                                                                    <form th:action="@{/admin/saveUser}" th:object="${userUp}" th:with="userUp=${us}">
+                                                                        <div class="admin-body_info_tabs_tab_content_formAdd_element">
+                                                                            <h4>First name</h4>
+                                                                            <input class="form-control" type="text" th:value="${userUp.id}" th:field="${userUp.id}"/>
+                                                                        </div>
+                                                                        <div class="admin-body_info_tabs_tab_content_formAdd_element">
+                                                                            <h4>First name</h4>
+                                                                            <input class="form-control" type="text" th:value="${userUp.name}"/>
+                                                                        </div>
+                                                                        <div class="admin-body_info_tabs_tab_content_formAdd_element">
+                                                                            <h4>Last name</h4>
+                                                                            <input class="form-control" type="text" th:value="${userUp.surname}"/>
+                                                                        </div>
+                                                                        <div class="admin-body_info_tabs_tab_content_formAdd_element">
+                                                                            <h4>Age</h4>
+                                                                            <input class="form-control" type="text" th:value="${userUp.age}" />
+                                                                        </div>
+                                                                        <div class="admin-body_info_tabs_tab_content_formAdd_element">
+                                                                            <h4>Email</h4>
+                                                                            <input class="form-control" type="text" th:value="${userUp.mail}" required/>
+                                                                        </div>
+                                                                        <div class="admin-body_info_tabs_tab_content_formAdd_element">
+                                                                            <h4>Password</h4>
+                                                                            <input class="form-control" type="text" th:value="${userUp.password}" />
+                                                                        </div>
+                                                                        <div class="admin-body_info_tabs_tab_content_formAdd_element">
+                                                                            <h4>Role</h4>
+                                                                            <select class="form-control" th:name="roleName", size="2" required>
+                                                                                <option th:each="role : ${roles}"
+                                                                                        th:value="${role.nameRole}"
+                                                                                        th:utext="${#strings.replace(role.nameRole, 'ROLE_', '')}"></option>
+                                                                            </select>
+                                                                        </div>
+                                                                        <div class="admin-body_info_tabs_tab_content_formAdd_element">
+                                                                            <button class="btn btn-success" type="submit">Add new user</button>
+                                                                        </div>
+                                                                    </form>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><a th:href="@{/admin/updateUser(id=${us})}">Edit</a></button>
+                                                                <button type="button" class="btn btn-primary">Save changes</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
                                                 <td><button type="button" class="btn btn-danger"><a th:href="@{/admin/deleteUser(id=${us.getId()})}">Delete</a></button></td>
                                             </tr>
                                         </th:block>
@@ -84,7 +145,7 @@
                             </div>
                             <div class="admin-body_info_tabs_tab_content">
                                 <div class="admin-body_info_tabs_tab_content_formAdd">
-                                    <form action="#" th:action="@{/admin/addUser}">
+                                    <form action="#" th:action="@{/admin/addUser}" method="post">
                                         <div class="admin-body_info_tabs_tab_content_formAdd_element">
                                             <h4>First name</h4>
                                             <input class="form-control" type="text" th:field="${user.name}"/>

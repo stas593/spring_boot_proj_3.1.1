@@ -18,63 +18,57 @@ import java.util.Set;
 public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Autowired
-    private UserDao ud;
+    private UserDao userDao;
     @Autowired
-    private RoleDao rd;
+    private RoleDao roleDao;
 
     @Override
     @Transactional
     public void addUser(User user) {
-        ud.addUser(user);
+        userDao.addUser(user);
     }
 
     @Override
     @Transactional
     public User getUser(long id){
-        return ud.getUser((int)id);
+        return userDao.getUser((int)id);
     }
 
     @Override
     @Transactional
     public User findUserByLogin(String userName) {
-        return ud.findByLogin(userName);
+        return userDao.findByLogin(userName);
     }
 
     @Override
     @Transactional
     public void deleteUser(long id) {
-        ud.deleteUser((int)id);
+        userDao.deleteUser((int)id);
     }
 
     @Override
     @Transactional
     public void updateUser(User user) {
-        ud.updateUser(user);
+        userDao.updateUser(user);
     }
 
     @Override
     @Transactional
     public List<User> getAllUsers() {
-        return ud.getAllUsers();
+        return userDao.getAllUsers();
     }
 
 
     @Override
     @Transactional
     public void addRoleToUser(long userId, String nameRole) {
-        ud.addRoleToUser(userId, rd.getRoleByName(nameRole));
-    }
-
-    @Override
-    @Transactional
-    public Set<Role> getAllRolesFromUser(long userId) {
-        return ud.getAllRolesFromUser(userId);
+        userDao.addRoleToUser(userId, roleDao.getRoleByName(nameRole));
     }
 
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        User myUser = ud.findByLogin(s);
+        User myUser = userDao.findByLogin(s);
         if (s == null) {
             throw new UsernameNotFoundException("Unknown user: "+s);
         }
