@@ -17,10 +17,14 @@ import java.util.Set;
 @Component
 public class UserServiceImpl implements UserService, UserDetailsService {
 
-    @Autowired
     private UserDao userDao;
-    @Autowired
     private RoleDao roleDao;
+
+    @Autowired
+    public UserServiceImpl(UserDao userDao, RoleDao roleDao) {
+        this.userDao = userDao;
+        this.roleDao = roleDao;
+    }
 
     @Override
     @Transactional

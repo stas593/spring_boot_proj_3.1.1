@@ -13,12 +13,16 @@ import java.security.Principal;
 @RequestMapping(value = "/user")
 public class User {
 
+    private UserService userService;
+
     @Autowired
-    private UserService us;
+    public User(UserService userService) {
+        this.userService = userService;
+    }
 
     @GetMapping(value = "")
     public String UserStr(Model model, Principal principal){
-        model.addAttribute("user", us.findUserByLogin(principal.getName()));
+        model.addAttribute("user", userService.findUserByLogin(principal.getName()));
         return "user";
     }
 }
