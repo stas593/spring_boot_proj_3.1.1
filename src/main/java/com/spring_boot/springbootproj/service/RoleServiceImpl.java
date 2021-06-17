@@ -14,11 +14,14 @@ import java.util.Set;
 @Component
 public class RoleServiceImpl implements RoleService {
 
-    @Autowired
     public RoleDao roleDao;
+    private UserDao userDao;
 
     @Autowired
-    private UserDao userDao;
+    public RoleServiceImpl(RoleDao roleDao, UserDao userDao) {
+        this.roleDao = roleDao;
+        this.userDao = userDao;
+    }
 
     @Override
     public void addRole(Role role) {
