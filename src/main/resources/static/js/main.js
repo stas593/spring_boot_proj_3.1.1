@@ -120,6 +120,14 @@ addUser.onsubmit = async (e) => {
         },
         body: JSON.stringify(user),
     });
+    let result = await response.json();
+    $('.error').html('');
+    if(result.status === 500) {
+        $('<p></p>').text('Пользователь с данной почтой существует').appendTo($('.error'))
+    } else {
+        $('<p></p>').css('color', 'blue').text('Пользователь успешно добавлен').appendTo($('.error'))
+    }
+    console.log('Пользователь: ' + user.name + ' успешно добавлен')
     loadUsersAdmin()
 };
 
