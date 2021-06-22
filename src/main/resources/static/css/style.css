@@ -84,7 +84,7 @@ tbody td{
 
 .admin-body_pages {
     margin-top: 15px;
-    height: 100vh!important;
+    height: 100%!important;
 }
 .admin-body_pages_button {
     padding-left: 15px;

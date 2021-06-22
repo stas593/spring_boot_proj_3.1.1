@@ -51,138 +51,17 @@
                                             <th scope="col">ID</th>
                                             <th scope="col">First Name</th>
                                             <th scope="col">Last Name</th>
-                                            <th scope="col">Age</th>
                                             <th scope="col">Email</th>
+                                            <th scope="col">Age</th>
                                             <th scope="col">Role</th>
                                             <th scope="col">Edit</th>
                                             <th scope="col">Delete</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <th:block th:each="us, stat : ${users}">
-                                            <tr>
-                                                <td><th:block th:text="${us.getId()}"></th:block></td>
-                                                <td><th:block th:text="${us.getName()}"></th:block></td>
-                                                <td><th:block th:text="${us.getSurname()}"></th:block></td>
-                                                <td><th:block th:text="${us.getAge()}"></th:block></td>
-                                                <td><th:block th:text="${us.getMail()}"></th:block></td>
-                                                <td ><span th:each="us1 : ${us.roles}" th:text="${#strings.replace(us1.nameRole, 'ROLE_', ' ')}"></span></td>
+                                    <tbody id="users" >
 
-                                                <!-- Modal update -->
-                                                <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" th:data-bs-target="'#updateModal' + ${stat.index}">Edit</button></td>
-                                                <div class="modal fade" th:id="updateModal + ${stat.index}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                    <div class="modal-dialog">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title" id="updatelLabel">Edit user</h5>
-                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <div class="admin-body_info_tabs_tab_content_formAdd">
-                                                                    <form action="#" th:id="updateUser + ${stat.index}" th:action="@{/admin/saveUser}" th:method="post" th:with="userUp=${us}">
-                                                                        <div class="admin-body_info_tabs_tab_content_formAdd_element">
-                                                                            <h4>Id</h4>
-                                                                            <input class="form-control" type="text" th:name="id"  th:value="${userUp.id}" readonly="readonly"/>
-                                                                        </div>
-                                                                        <div class="admin-body_info_tabs_tab_content_formAdd_element">
-                                                                            <h4>First name</h4>
-                                                                            <input class="form-control" type="text" th:name="name" th:value="${userUp.name}"/>
-                                                                        </div>
-                                                                        <div class="admin-body_info_tabs_tab_content_formAdd_element">
-                                                                            <h4>Last name</h4>
-                                                                            <input class="form-control" type="text" th:name="surname" th:value="${userUp.surname}"/>
-                                                                        </div>
-                                                                        <div class="admin-body_info_tabs_tab_content_formAdd_element">
-                                                                            <h4>Age</h4>
-                                                                            <input class="form-control" type="text" th:name="age" th:value="${userUp.age}" />
-                                                                        </div>
-                                                                        <div class="admin-body_info_tabs_tab_content_formAdd_element">
-                                                                            <h4>Email</h4>
-                                                                            <input class="form-control" type="text" th:name="mail" th:value="${userUp.mail}" required/>
-                                                                        </div>
-                                                                        <div class="admin-body_info_tabs_tab_content_formAdd_element">
-                                                                            <h4>Password</h4>
-                                                                            <input class="form-control" type="text" th:name="password" th:value="${userUp.password}" />
-                                                                        </div>
-                                                                        <div class="admin-body_info_tabs_tab_content_formAdd_element">
-                                                                            <h4>Role</h4>
-                                                                            <select class="form-control" th:name="roleName", size="2">
-                                                                                <option th:each="role : ${roles}"
-                                                                                        th:value="${role.nameRole}"
-                                                                                        th:utext="${#strings.replace(role.nameRole, 'ROLE_', '')}"></option>
-                                                                            </select>
-                                                                        </div>
-                                                                    </form>
-                                                                </div>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                                <button type="submit" th:form="updateUser + ${stat.index}" class="btn btn-primary">Edit</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <td><button type="button" class="btn btn-danger" data-bs-toggle="modal" th:data-bs-target="'#deleteModal' + ${stat.index}">Delete</button></td>
-                                                <!-- Modal delete -->
-                                                <div class="modal fade" th:id="deleteModal + ${stat.index}" tabindex="-1" aria-labelledby="exampleLabel" aria-hidden="true">
-
-                                                    <div class="modal-dialog">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title" id="exampleModalLabel">Delete user</h5>
-                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <div class="admin-body_info_tabs_tab_content_formAdd">
-                                                                    <form action="#" th:id="deleteUser + ${stat.index}" th:action="@{/admin/deleteUser(id=${us.getId()})}" th:method="get" th:with="userUp=${us}">
-                                                                        <div class="admin-body_info_tabs_tab_content_formAdd_element">
-                                                                            <h4>Id</h4>
-                                                                            <input class="form-control" type="text" th:name="id"  th:value="${userUp.id}" readonly="readonly"/>
-                                                                        </div>
-                                                                        <div class="admin-body_info_tabs_tab_content_formAdd_element">
-                                                                            <h4>First name</h4>
-                                                                            <input class="form-control" type="text" th:name="name" th:value="${userUp.name}" readonly="readonly"/>
-                                                                        </div>
-                                                                        <div class="admin-body_info_tabs_tab_content_formAdd_element">
-                                                                            <h4>Last name</h4>
-                                                                            <input class="form-control" type="text" th:name="surname" th:value="${userUp.surname}" readonly="readonly"/>
-                                                                        </div>
-                                                                        <div class="admin-body_info_tabs_tab_content_formAdd_element">
-                                                                            <h4>Age</h4>
-                                                                            <input class="form-control" type="text" th:name="age" th:value="${userUp.age}" readonly="readonly"/>
-                                                                        </div>
-                                                                        <div class="admin-body_info_tabs_tab_content_formAdd_element">
-                                                                            <h4>Email</h4>
-                                                                            <input class="form-control" type="text" th:name="mail" th:value="${userUp.mail}" readonly="readonly"/>
-                                                                        </div>
-                                                                        <div class="admin-body_info_tabs_tab_content_formAdd_element">
-                                                                            <h4>Password</h4>
-                                                                            <input class="form-control" type="text" th:name="password" th:value="${userUp.password}" readonly="readonly"/>
-                                                                        </div>
-                                                                        <div class="admin-body_info_tabs_tab_content_formAdd_element">
-                                                                            <h4>Role</h4>
-                                                                            <select class="form-control" th:name="roleName", size="2" readonly="readonly">
-                                                                                <option th:each="role : ${roles}"
-                                                                                        th:value="${role.nameRole}"
-                                                                                        th:utext="${#strings.replace(role.nameRole, 'ROLE_', '')}"></option>
-                                                                            </select>
-                                                                        </div>
-                                                                    </form>
-                                                                </div>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                                <button type="submit" th:form="deleteUser + ${stat.index}" class="btn btn-danger">Delete</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </tr>
-                                        </th:block>
                                     </tbody>
                                 </table>
-
                             </div>
                         </div>
                     </div>
@@ -193,37 +72,37 @@
                             </div>
                             <div class="admin-body_info_tabs_tab_content">
                                 <div class="admin-body_info_tabs_tab_content_formAdd">
-                                    <form action="#" th:action="@{/admin/addUser}" method="post">
+                                    <form action="#" id ="addUser" method="post">
                                         <div class="admin-body_info_tabs_tab_content_formAdd_element">
                                             <h4>First name</h4>
-                                            <input class="form-control" type="text" th:field="${user.name}"/>
+                                            <input class="form-control" type="text" name="name"/>
                                         </div>
                                         <div class="admin-body_info_tabs_tab_content_formAdd_element">
                                             <h4>Last name</h4>
-                                            <input class="form-control" type="text" th:field="${user.surname}"/>
-                                        </div>
-                                        <div class="admin-body_info_tabs_tab_content_formAdd_element">
-                                            <h4>Age</h4>
-                                            <input class="form-control" type="text" th:field="${user.age}" />
+                                            <input class="form-control" type="text" name="surname"/>
                                         </div>
                                         <div class="admin-body_info_tabs_tab_content_formAdd_element">
                                             <h4>Email</h4>
-                                            <input class="form-control" type="text" th:field="${user.mail}" required/>
+                                            <input class="form-control" type="text" name="mail" required/>
+                                        </div>
+                                        <div class="admin-body_info_tabs_tab_content_formAdd_element">
+                                            <h4>Age</h4>
+                                            <input class="form-control" type="text" name="age"/>
                                         </div>
                                         <div class="admin-body_info_tabs_tab_content_formAdd_element">
                                             <h4>Password</h4>
-                                            <input class="form-control" type="password" th:field="${user.password}" />
+                                            <input class="form-control" type="password" name="password"/>
                                         </div>
                                         <div class="admin-body_info_tabs_tab_content_formAdd_element">
                                             <h4>Role</h4>
-                                            <select class="form-control" th:name="roleName", size="2" required>
+                                            <select class="form-control" name="newRole" size="2" required>
                                                 <option th:each="role : ${roles}"
                                                         th:value="${role.nameRole}"
                                                         th:utext="${#strings.replace(role.nameRole, 'ROLE_', '')}"></option>
                                             </select>
                                         </div>
                                         <div class="admin-body_info_tabs_tab_content_formAdd_element">
-                                            <button class="btn btn-success" type="submit">Add new user</button>
+                                            <button id="submitButton" class="btn btn-success" type="submit">Add new user</button>
                                         </div>
                                     </form>
                                 </div>
@@ -235,6 +114,218 @@
         </div>
     </div>
 
+<!--updateModal-->
+    <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="updatelLabel1">Edit user</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="admin-body_info_tabs_tab_content_formAdd">
+                        <form id="editUser">
+                            <div class="admin-body_info_tabs_tab_content_formAdd_element">
+                                <h4>Id</h4>
+                                <input class="form-control" id="form-control_id" type="text" name="id" readonly="readonly"/>
+                            </div>
+                            <div class="admin-body_info_tabs_tab_content_formAdd_element">
+                                <h4>First name</h4>
+                                <input class="form-control" id="form-control_name" type="text" name="name"/>
+                            </div>
+                            <div class="admin-body_info_tabs_tab_content_formAdd_element">
+                                <h4>Last name</h4>
+                                <input class="form-control" id="form-control_surname" type="text" name="surname"/>
+                            </div>
+                            <div class="admin-body_info_tabs_tab_content_formAdd_element">
+                                <h4>Email</h4>
+                                <input class="form-control" id="form-control_mail" type="text" name="mail" required/>
+                            </div>
+                            <div class="admin-body_info_tabs_tab_content_formAdd_element">
+                                <h4>Age</h4>
+                                <input class="form-control" id="form-control_age" type="text" name="age"/>
+                            </div>
+                            <div class="admin-body_info_tabs_tab_content_formAdd_element">
+                                <h4>Password</h4>
+                                <input class="form-control" id="form-control_password" type="text" name="password"/>
+                            </div>
+                            <div class="admin-body_info_tabs_tab_content_formAdd_element">
+                                <h4>Role</h4>
+                                <select class="form-control" th:name="newRole", size="2">
+                                    <option th:each="role : ${roles}"
+                                            th:value="${role.nameRole}"
+                                            th:utext="${#strings.replace(role.nameRole, 'ROLE_', '')}"></option>
+                                </select>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" form="editUser" class="btn btn-primary">Edit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!--deleteModal-->
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteLabel1">Delete user</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="admin-body_info_tabs_tab_content_formAdd">
+                        <form id="deleteUser" action="/api/users">
+                            <div class="admin-body_info_tabs_tab_content_formAdd_element">
+                                <h4>Id</h4>
+                                <input class="form-control" id="form-control_delete_id" type="text" name="id" readonly="readonly"/>
+                            </div>
+                            <div class="admin-body_info_tabs_tab_content_formAdd_element">
+                                <h4>First name</h4>
+                                <input class="form-control" id="form-control_delete_name" type="text" name="name" readonly="readonly"/>
+                            </div>
+                            <div class="admin-body_info_tabs_tab_content_formAdd_element">
+                                <h4>Last name</h4>
+                                <input class="form-control" id="form-control_delete_surname" type="text" name="surname" readonly="readonly"/>
+                            </div>
+                            <div class="admin-body_info_tabs_tab_content_formAdd_element">
+                                <h4>Email</h4>
+                                <input class="form-control" id="form-control_delete_mail" type="text" name="mail" readonly="readonly"/>
+                            </div>
+                            <div class="admin-body_info_tabs_tab_content_formAdd_element">
+                                <h4>Age</h4>
+                                <input class="form-control" id="form-control_delete_age" type="text" name="age" readonly="readonly"/>
+                            </div>
+                            <div class="admin-body_info_tabs_tab_content_formAdd_element">
+                                <h4>Password</h4>
+                                <input class="form-control" id="form-control_delete_password" type="text" name="password" readonly="readonly"/>
+                            </div>
+                            <div class="admin-body_info_tabs_tab_content_formAdd_element">
+                                <h4>Role</h4>
+                                <select class="form-control" th:name="newRole", size="2" readonly="readonly">
+                                    <option th:each="role : ${roles}"
+                                            th:value="${role.nameRole}"
+                                            th:utext="${#strings.replace(role.nameRole, 'ROLE_', '')}"></option>
+                                </select>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" form="deleteUser" class="btn btn-danger">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="webjars/jquery/3.3.1/jquery.min.js"></script>
+    <script src="../js/main.js" th:src="@{/js/main.js}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            loadUsersAdmin();
+        });
+        function loadUsersAdmin() {
+            fetch("/api/users")
+                .then((response) => {
+                    return response.json();
+                })
+                .then((data) => {
+                    $("#users").html('');
+                    data.forEach(function (el) {
+                        var tbody = $('#users')
+                        var tr = $('<tr></tr>').appendTo(tbody)
+                        var td
+                        $('<td></td>').text(el.id).appendTo(tr)
+                        $('<td></td>').text(el.name).appendTo(tr)
+                        $('<td></td>').text(el.surname).appendTo(tr)
+                        $('<td></td>').text(el.mail).appendTo(tr)
+                        $('<td></td>').text(el.age).appendTo(tr)
+                        $('<td></td>').text(getRoles(el)).appendTo(tr)
+                        td = $('<td></td>').appendTo(tr)
+                        $('<button></button>').text('Edit').attr('onClick', 'openAndFillModalUpdate(this)')
+                            .addClass('btn btn-primary')
+                            .attr('data-bs-target', '#updateModal')
+                            .attr('data-bs-toggle', 'modal')
+                            .val(el.id).appendTo(td)
+                        td = $('<td></td>').appendTo(tr)
+                        $('<button></button>').text('Delete').appendTo(td).attr('onClick', 'openAndFillModalDelete(this)')
+                            .addClass('btn btn-danger')
+                            .attr('data-bs-target', '#deleteModal')
+                            .attr('data-bs-toggle', 'modal')
+                            .val(el.id).appendTo(td)
+                    })
+                });
+        }
+
+        function openAndFillModalUpdate(obj) {
+            var id = obj.value
+            var user = getUserById(id)
+            $('#form-control_id').val(user.id)
+            $('#form-control_name').val(user.name)
+            $('#form-control_surname').val(user.surname)
+            $('#form-control_mail').val(user.mail)
+            $('#form-control_age').val(user.age)
+            $('#form-control_password').val(user.password)
+        }
+        function openAndFillModalDelete(obj) {
+            var id = obj.value
+            var user = getUserById(id)
+            $('#form-control_delete_id').val(user.id)
+            $('#form-control_delete_name').val(user.name)
+            $('#form-control_delete_surname').val(user.surname)
+            $('#form-control_delete_mail').val(user.mail)
+            $('#form-control_delete_age').val(user.age)
+            $('#form-control_delete_password').val(user.password)
+        }
+
+        addUser.onsubmit = async (e) => {
+            e.preventDefault();
+            var user = getUserFromForm(addUser);
+            let response = await fetch('/api/users', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8'
+                },
+                body: JSON.stringify(user),
+            });
+            loadUsersAdmin()
+        };
+
+        editUser.onsubmit = async (e) => {
+            e.preventDefault();
+            var user = getUserFromForm(editUser);
+            console.log(user)
+            let response = await fetch('/api/users/', {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8'
+                },
+                body: JSON.stringify(user),
+            });
+            $('#updateModal').modal('hide')
+            loadUsersAdmin()
+        };
+
+        deleteUser.onsubmit = async (e) => {
+            e.preventDefault();
+            var user = getUserFromForm(deleteUser);
+            console.log(user)
+            let response = await fetch('/api/users/' + user.id, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8'
+                },
+                body: JSON.stringify(user),
+            });
+            $('#deleteModal').modal('hide')
+            loadUsersAdmin()
+        };
+
+    </script>
     </body>
 </html>

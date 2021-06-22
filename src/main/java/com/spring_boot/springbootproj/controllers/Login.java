@@ -13,4 +13,9 @@ public class Login {
         return "login";
     }
 
+    @GetMapping(value = "")
+    public String Page() {
+        return "login";
+    }
+
 }

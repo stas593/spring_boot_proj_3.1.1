@@ -48,15 +48,7 @@
                                 <th scope="col">Role</th>
                             </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <td><th:block th:text="${user.getId()}"></th:block></td>
-                                    <td><th:block th:text="${user.getName()}"></th:block></td>
-                                    <td><th:block th:text="${user.getSurname()}"></th:block></td>
-                                    <td><th:block th:text="${user.getMail()}"></th:block></td>
-                                    <td><th:block th:text="${user.getAge()}"></th:block></td>
-                                    <td ><span th:each="us1 : ${user.roles}" th:text="${#strings.replace(us1.nameRole, 'ROLE_', ' ')}"></span></td>
-                                </tr>
+                            <tbody id="users">
                             </tbody>
                         </table>
                     </div>
@@ -64,6 +56,14 @@
         </div>
     </div>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+
+    <script th:inline="javascript" src="../js/main.js" th:src="@{/js/main.js}">console.log([[${user.getId()}]])</script>
+    <script src="webjars/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            loadMyData();
+        });
+    </script>
 </body>
 </html>
