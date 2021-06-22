@@ -56,3 +56,99 @@ function loadMyData() {
     })
 }
 
+function loadUsersAdmin() {
+    fetch("/api/users")
+        .then((response) => {
+            return response.json();
+        })
+        .then((data) => {
+            $("#users").html('');
+            data.forEach(function (el) {
+                var tbody = $('#users')
+                var tr = $('<tr></tr>').appendTo(tbody)
+                var td
+                $('<td></td>').text(el.id).appendTo(tr)
+                $('<td></td>').text(el.name).appendTo(tr)
+                $('<td></td>').text(el.surname).appendTo(tr)
+                $('<td></td>').text(el.mail).appendTo(tr)
+                $('<td></td>').text(el.age).appendTo(tr)
+                $('<td></td>').text(getRoles(el)).appendTo(tr)
+                td = $('<td></td>').appendTo(tr)
+                $('<button></button>').text('Edit').attr('onClick', 'openAndFillModalUpdate(this)')
+                    .addClass('btn btn-primary')
+                    .attr('data-bs-target', '#updateModal')
+                    .attr('data-bs-toggle', 'modal')
+                    .val(el.id).appendTo(td)
+                td = $('<td></td>').appendTo(tr)
+                $('<button></button>').text('Delete').appendTo(td).attr('onClick', 'openAndFillModalDelete(this)')
+                    .addClass('btn btn-danger')
+                    .attr('data-bs-target', '#deleteModal')
+                    .attr('data-bs-toggle', 'modal')
+                    .val(el.id).appendTo(td)
+            })
+        });
+}
+
+function openAndFillModalUpdate(obj) {
+    var id = obj.value
+    var user = getUserById(id)
+    $('#form-control_id').val(user.id)
+    $('#form-control_name').val(user.name)
+    $('#form-control_surname').val(user.surname)
+    $('#form-control_mail').val(user.mail)
+    $('#form-control_age').val(user.age)
+    $('#form-control_password').val(user.password)
+}
+function openAndFillModalDelete(obj) {
+    var id = obj.value
+    var user = getUserById(id)
+    $('#form-control_delete_id').val(user.id)
+    $('#form-control_delete_name').val(user.name)
+    $('#form-control_delete_surname').val(user.surname)
+    $('#form-control_delete_mail').val(user.mail)
+    $('#form-control_delete_age').val(user.age)
+    $('#form-control_delete_password').val(user.password)
+}
+
+addUser.onsubmit = async (e) => {
+    e.preventDefault();
+    var user = getUserFromForm(addUser);
+    let response = await fetch('/api/users', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json;charset=utf-8'
+        },
+        body: JSON.stringify(user),
+    });
+    loadUsersAdmin()
+};
+
+editUser.onsubmit = async (e) => {
+    e.preventDefault();
+    var user = getUserFromForm(editUser);
+    console.log(user)
+    let response = await fetch('/api/users/', {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json;charset=utf-8'
+        },
+        body: JSON.stringify(user),
+    });
+    $('#updateModal').modal('hide')
+    loadUsersAdmin()
+};
+
+deleteUser.onsubmit = async (e) => {
+    e.preventDefault();
+    var user = getUserFromForm(deleteUser);
+    console.log(user)
+    let response = await fetch('/api/users/' + user.id, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json;charset=utf-8'
+        },
+        body: JSON.stringify(user),
+    });
+    $('#deleteModal').modal('hide')
+    loadUsersAdmin()
+};
