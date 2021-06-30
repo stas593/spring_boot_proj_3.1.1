@@ -29,50 +29,51 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     @Transactional
     public void addUser(User user) {
-        userDao.addUser(user);
+        userDao.save(user);
     }
 
     @Override
     @Transactional
     public User getUser(long id){
-        return userDao.getUser((int)id);
+        return userDao.getById(id);
     }
 
     @Override
     @Transactional
     public User findUserByLogin(String userName) {
-        return userDao.findByLogin(userName);
+        return userDao.findByMail(userName);
     }
 
     @Override
     @Transactional
     public void deleteUser(long id) {
-        userDao.deleteUser((int)id);
+        userDao.deleteById(id);
     }
 
     @Override
     @Transactional
     public void updateUser(User user) {
-        userDao.updateUser(user);
+        userDao.save(user);
     }
 
     @Override
     @Transactional
     public List<User> getAllUsers() {
-        return userDao.getAllUsers();
+        return userDao.findAll();
     }
 
 
     @Override
     @Transactional
     public void addRoleToUser(long userId, String nameRole) {
-        userDao.addRoleToUser(userId, roleDao.getRoleByName(nameRole));
+        User user = userDao.getById(userId);
+        user.addRoleToUser(roleDao.getRoleByNameRole(nameRole));
     }
 
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        User myUser = userDao.findByLogin(s);
+        User myUser = userDao.findByMail(s);
         if (s == null) {
             throw new UsernameNotFoundException("Unknown user: "+s);
         }
