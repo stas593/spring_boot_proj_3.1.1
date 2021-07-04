@@ -67,7 +67,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Transactional
     public void addRoleToUser(long userId, String nameRole) {
         User user = userDao.getById(userId);
-        user.addRoleToUser(roleDao.getRoleByNameRole(nameRole));
+        user.addRoleToUser(roleDao.findByNameRole(nameRole));
     }
 
     @Override

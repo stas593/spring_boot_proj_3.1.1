@@ -37,7 +37,7 @@ public class User implements UserDetails {
     @Transient
     private String newRole;
 
-    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH}, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.REFRESH}, fetch = FetchType.EAGER)
     @JoinTable(
             name = "user_role"
             , joinColumns = @JoinColumn(name = "user_id")
